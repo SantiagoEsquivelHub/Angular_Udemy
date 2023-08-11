@@ -39,4 +39,8 @@ console.log("🚀 Duration:", duration)
 console.log("🚀 Author:", author)
 console.log("🚀 Year:", year)
 
+const [, , p3 = "Not found"]: string[] = ["Gokú", "Vegeta",];
+
+console.log("🚀 Character 3: ", p3)
+
 export { };
