@@ -1,4 +1,4 @@
-interface Product {
+export interface Product {
     description: string;
     price: number;
 }
@@ -19,7 +19,7 @@ const tablet: Product = {
 }
 
 
-const taxCalculation = ({ products, tax }: TaxCalculationOptions): number[] => {
+export const taxCalculation = ({ products, tax }: TaxCalculationOptions): number[] => {
     let total = 0;
 
     products.map(({ price }) => total += price)
@@ -38,5 +38,3 @@ const [total, newTax] = taxCalculation({
 console.log("🚀 ~ file: 06-function-destructuring.ts:38 ~ total:", total)
 console.log("🚀 ~ file: 06-function-destructuring.ts:38 ~ newTax:", newTax)
 
-
-export { };
