@@ -23,6 +23,10 @@ export class MainPageComponent {
     },
   ];
 
+  onDeleteCharacter(index: number): void {
+    this.characters.splice(index, 1)
+  }
+
   onNewCharacter(character: Character): void {
     this.characters.push(character)
   }

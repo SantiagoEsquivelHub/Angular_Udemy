@@ -1,7 +1,7 @@
 <h4>Listado</h4>
 <ul class="list-group">
   <li
-    class="list-group-item"
+    class="list-group-item d-flex justify-content-between align-items-center"
     *ngFor="
       let character of charactersList;
       let i = index;
@@ -15,14 +15,12 @@
       'list-group-item-danger': isLast,
     }"
   >
-    <span class="text-primary">{{ i + 1 }}.</span>
-    {{ character.name }} -
-    <strong>Power: </strong>
-    <span>{{ character.power }}</span>
-
-    <span> ¿Soy el primero?: {{ isFirst }}</span>
-    <span> ¿Soy el último?: {{ isLast }}</span>
-    <span> ¿Soy par?: {{ isEven }}</span>
-    <span> ¿Soy impar?: {{ isOdd }}</span>
+    <div class="">
+      <span class="text-primary">{{ i + 1 }}.</span>
+      {{ character.name }} -
+      <strong>Power: </strong>
+      <span>{{ character.power }}</span>
+    </div>
+    <button class="btn btn-danger" (click)="onDeleteCharacter(i)">X</button>
   </li>
 </ul>
