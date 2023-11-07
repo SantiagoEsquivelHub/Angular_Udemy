@@ -17,7 +17,7 @@ export class CountryPageComponent implements OnInit {
     private countriesService: CountriesService,
   ) { }
 
-  public country!: Country | null;
+  public country?: Country | null;
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -29,7 +29,6 @@ export class CountryPageComponent implements OnInit {
         this.country = country;
       });
   }
-
 
 
 }
