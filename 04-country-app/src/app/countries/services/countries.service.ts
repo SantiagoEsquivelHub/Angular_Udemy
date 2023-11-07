@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Country } from '../interfaces/country';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, of, map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CountriesService {
@@ -10,8 +10,21 @@ export class CountriesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  searchCapital(term: string): Observable<Country[]> {
-    const url = `${this.apiUrl}/capital/${term}`;
+
+  searchCountryAlphaCode(code: string): Observable<Country | null> {
+    const url = `${this.apiUrl}/alpha/${code}`;
+    return this.httpClient.get<Country[]>(url)
+      .pipe(
+        map(countries => countries.length > 0 ? countries[0] : null),
+        catchError(err => {
+          console.log("🚀 ~ file: countries.service.ts:19 ~ CountriesService ~ searchCountryAlphaCode ~ err:", err)
+          return of(null)
+        }),
+      )
+  }
+
+  searchCapital(capital: string): Observable<Country[]> {
+    const url = `${this.apiUrl}/capital/${capital}`;
     return this.httpClient.get<Country[]>(url)
       .pipe(
         catchError(err => {
@@ -21,8 +34,8 @@ export class CountriesService {
       )
   }
 
-  searchCountry(term: string): Observable<Country[]> {
-    const url = `${this.apiUrl}/name/${term}`;
+  searchCountry(country: string): Observable<Country[]> {
+    const url = `${this.apiUrl}/name/${country}`;
     return this.httpClient.get<Country[]>(url)
       .pipe(
         catchError(err => {
@@ -32,8 +45,8 @@ export class CountriesService {
       )
   }
 
-  searchRegion(term: string): Observable<Country[]> {
-    const url = `${this.apiUrl}/region/${term}`;
+  searchRegion(region: string): Observable<Country[]> {
+    const url = `${this.apiUrl}/region/${region}`;
     return this.httpClient.get<Country[]>(url)
       .pipe(
         catchError(err => {

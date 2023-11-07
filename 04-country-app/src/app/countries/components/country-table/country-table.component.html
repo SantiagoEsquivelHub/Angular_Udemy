@@ -29,7 +29,7 @@
         <td>{{ country.capital }}</td>
         <td>{{ country.population | number }}</td>
         <td>
-          <a href="#">See more...</a>
+          <a [href]="country.idd">See more...</a>
         </td>
       </tr>
     </tbody>
