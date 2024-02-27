@@ -18,7 +18,6 @@ export class CountriesService {
           console.log("🚀 ~ CountriesService ~ getCountriesRequest ~ err:", err)
           return of([])
         }),
-        delay(3000)
       )
   }
 
