@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Country } from '../interfaces/country';
-import { Observable, catchError, of, map } from 'rxjs';
+import { Observable, catchError, of, map, delay } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CountriesService {
@@ -10,6 +10,17 @@ export class CountriesService {
 
   constructor(private httpClient: HttpClient) { }
 
+
+  private getCountriesRequest(url: string): Observable<Country[]> {
+    return this.httpClient.get<Country[]>(url)
+      .pipe(
+        catchError(err => {
+          console.log("🚀 ~ CountriesService ~ getCountriesRequest ~ err:", err)
+          return of([])
+        }),
+        delay(3000)
+      )
+  }
 
   searchCountryAlphaCode(code: string): Observable<Country | null> {
     const url = `${this.apiUrl}/alpha/${code}`;
@@ -25,35 +36,17 @@ export class CountriesService {
 
   searchCapital(capital: string): Observable<Country[]> {
     const url = `${this.apiUrl}/capital/${capital}`;
-    return this.httpClient.get<Country[]>(url)
-      .pipe(
-        catchError(err => {
-          console.log("🚀 ~ file: countries.service.ts:18 ~ CountriesService ~ searchCapital ~ err:", err)
-          return of([])
-        }),
-      )
+    return this.getCountriesRequest(url);
   }
 
   searchCountry(country: string): Observable<Country[]> {
     const url = `${this.apiUrl}/name/${country}`;
-    return this.httpClient.get<Country[]>(url)
-      .pipe(
-        catchError(err => {
-          console.log("🚀 ~ file: countries.service.ts:29 ~ CountriesService ~ searchCountry ~ err:", err)
-          return of([])
-        }),
-      )
+    return this.getCountriesRequest(url);
   }
 
   searchRegion(region: string): Observable<Country[]> {
     const url = `${this.apiUrl}/region/${region}`;
-    return this.httpClient.get<Country[]>(url)
-      .pipe(
-        catchError(err => {
-          console.log("🚀 ~ file: countries.service.ts:40 ~ CountriesService ~ searchRegion ~ err:", err)
-          return of([])
-        }),
-      )
+    return this.getCountriesRequest(url);
   }
 
 }
