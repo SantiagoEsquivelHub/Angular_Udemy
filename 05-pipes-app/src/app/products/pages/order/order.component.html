@@ -1,7 +1,5 @@
 <p-panel header="Personalized Pipes" class="p-1">
-  <p>Personalized Pipes - created by us</p>
-  <p>{{ "santiago" | toggleCase : true }}</p>
-  <p>{{ "SANTIAGO" | toggleCase : false }}</p>
+  <p>Personalized Pipes - created by {{ "santiago" | toggleCase : isUpperCase }}</p>
 </p-panel>
 
 <p-toolbar>
@@ -9,8 +7,9 @@
     <button
       pButton
       label="ToggleCase"
-      icon="pi pi-sort"
+      icon="pi pi-search"
       class="mr-2"
+      (click)="toggleUpperCase()"
     ></button>
   </div>
 
