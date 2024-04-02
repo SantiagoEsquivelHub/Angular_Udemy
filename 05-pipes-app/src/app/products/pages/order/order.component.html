@@ -1,5 +1,7 @@
 <p-panel header="Personalized Pipes" class="p-1">
-  <p>Personalized Pipes - created by {{ "santiago" | toggleCase : isUpperCase }}</p>
+  <p>
+    Personalized Pipes - created by {{ "santiago" | toggleCase : isUpperCase }}
+  </p>
 </p-panel>
 
 <p-toolbar>
@@ -34,3 +36,26 @@
     ></button>
   </div>
 </p-toolbar>
+
+<div class="grid">
+  <div class="col mt-2">
+    <p-panel header="Heroes">
+      <p-table [value]="heroes" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Name</th>
+            <th>Can fly?</th>
+            <th>Color</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+          <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.canFly | canFly }}</td>
+            <td>{{ product.color }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-panel>
+  </div>
+</div>
