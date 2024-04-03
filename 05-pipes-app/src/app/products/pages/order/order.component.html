@@ -21,18 +21,21 @@
       label="By name"
       icon="pi pi-sort"
       class="mr-2 p-button-success"
+      (click)="changeOrder('name')"
     ></button>
     <button
       pButton
       label="I can fly"
       icon="pi pi-sort"
       class="mr-2 p-button-danger"
+      (click)="changeOrder('canFly')"
     ></button>
     <button
       pButton
       label="By color"
       icon="pi pi-sort"
       class="mr-2 p-button-help"
+      (click)="changeOrder('color')"
     ></button>
   </div>
 </p-toolbar>
@@ -40,7 +43,10 @@
 <div class="grid">
   <div class="col mt-2">
     <p-panel header="Heroes">
-      <p-table [value]="heroes" [tableStyle]="{ 'min-width': '50rem' }">
+      <p-table
+        [value]="heroes | sortBy : sortBy"
+        [tableStyle]="{ 'min-width': '50rem' }"
+      >
         <ng-template pTemplate="header">
           <tr>
             <th>Name</th>

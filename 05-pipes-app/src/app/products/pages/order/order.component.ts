@@ -31,7 +31,13 @@ export class OrderComponent {
     },
   ];
 
+  public sortBy: keyof Hero | null = null;
+
   toggleUpperCase(): void {
     this.isUpperCase = !this.isUpperCase;
+  }
+
+  changeOrder(value: keyof Hero): void {
+    this.sortBy = value;
   }
 }
