@@ -8,7 +8,7 @@
     </mat-card-subtitle>
   </mat-card-header>
 
-  <!-- TODO: Image -->
+  <img [src]="hero | heroImage" [alt]="hero.superhero">
 
   <mat-card-content class="mt-2">
     <h4>{{hero.publisher}}</h4>
