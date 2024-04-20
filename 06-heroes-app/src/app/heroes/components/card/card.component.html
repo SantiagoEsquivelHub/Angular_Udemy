@@ -26,14 +26,14 @@
   <mat-divider></mat-divider>
 
   <mat-card-actions>
-    <button mat-button mat-raised [routerLink]="['heroes/edit', hero.id]" color="primary">
+    <button mat-button mat-raised [routerLink]="['/heroes/edit', hero.id]" color="primary">
       <mat-icon>edit</mat-icon>
       Edit
     </button>
 
     <span class="spacer"></span>
 
-    <button mat-button mat-raised [routerLink]="['heroes']">
+    <button mat-button mat-raised [routerLink]="['/heroes', hero.id]">
       <mat-icon>more_horizontal</mat-icon>
       More
     </button>

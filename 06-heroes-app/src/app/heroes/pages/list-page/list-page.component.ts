@@ -15,10 +15,7 @@ export class ListPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.heroesService.getHeroes().subscribe(heroes => {
-      console.log("🚀 ~ ListPageComponent ~ ngOnInit ~ heroes:",heroes)
       this.heroes = heroes;
-      console.log("🚀 ~ ListPageComponent ~ ngOnInit ~ this.heroes:",this.heroes)
-
     });
   }
 
