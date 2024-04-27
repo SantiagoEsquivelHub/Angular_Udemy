@@ -1,6 +1,5 @@
 <h1>
-  Edit / Add
-  Hero
+  Edit / Add Hero
   <span>Superman</span>
 </h1>
 
@@ -10,68 +9,65 @@
   <div class="col-12 sm:col-6">
     <mat-card>
       <mat-card-content>
-        <div class="grid">
-
+        <form class="grid" [formGroup]="heroForm">
           <mat-form-field class="col-12 sm:col-6">
-            <mat-label>
-              Super Hero
-            </mat-label>
-            <input matInput type="text" required>
+            <mat-label> Super Hero </mat-label>
+            <input matInput type="text" required formControlName="superhero" />
           </mat-form-field>
 
           <mat-form-field class="col-12 sm:col-6">
-            <mat-label>
-              Alter Ego
-            </mat-label>
-            <input matInput type="text" required>
+            <mat-label> Alter Ego </mat-label>
+            <input matInput type="text" required formControlName="alter_ego" />
           </mat-form-field>
 
-          <mat-form-field class="col-12 sm:col-6">
-            <mat-label>
-              First Appearance
-            </mat-label>
-            <input matInput type="text" required>
+          <mat-form-field class="col-12">
+            <mat-label> First Appearance </mat-label>
+            <input
+              matInput
+              type="text"
+              required
+              formControlName="first_appearance"
+            />
           </mat-form-field>
 
-          <mat-form-field class="col-12 sm:col-6">
-            <mat-label>
-              Characters
-            </mat-label>
-            <input matInput type="text" required>
+          <mat-form-field class="col-12">
+            <mat-label> Characters </mat-label>
+            <input matInput type="text" required formControlName="characters" />
           </mat-form-field>
 
-          <mat-form-field class="col-12 sm:col-6">
-            <mat-label>
-              Creator
-            </mat-label>
-            <mat-select required="">
-              <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">
-                {{publisher.desc}}
+          <mat-form-field class="col-12">
+            <mat-label> Creator </mat-label>
+            <mat-select required="" formControlName="publisher">
+              <mat-option
+                *ngFor="let publisher of publishers"
+                [value]="publisher.id"
+              >
+                {{ publisher.desc }}
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
+
+          <mat-form-field class="col-12">
+            <mat-label> Alternative Image </mat-label>
+            <input matInput type="text" required formControlName="alt_img" />
+          </mat-form-field>
+        </form>
 
         <div class="flex justify-content-between">
+          <button mat-flat-button color="warn">Delete</button>
 
-          <button mat-flat-button color="warn">
-            Delete
-          </button>
-
-          <button mat-flat-button color="primary">
+          <button mat-flat-button color="primary" (click)="onSubmit()">
             <mat-icon>save</mat-icon>
             Save
           </button>
         </div>
-
       </mat-card-content>
     </mat-card>
   </div>
 
-
   <div class="col-12 sm:col-6">
     <mat-card>
-      <img src="" alt="Hero image" mat-card-image>
+      <img src="" alt="Hero image" mat-card-image />
     </mat-card>
   </div>
 </div>
