@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { MatDialog } from '@angular/material/dialog';
+
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { Hero, Publisher } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 @Component({
@@ -10,7 +14,7 @@ import { switchMap } from 'rxjs';
   templateUrl: './new-page.component.html',
   styles: ``
 })
-export class NewPageComponent implements OnInit{
+export class NewPageComponent implements OnInit {
 
   public heroForm = new FormGroup({
     id: new FormControl<string>(''),
@@ -36,20 +40,21 @@ export class NewPageComponent implements OnInit{
   constructor(
     private heroesService: HeroesService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    if(!this.router.url.includes('edit')) return;
+    if (!this.router.url.includes('edit')) return;
 
     this.activatedRoute.params
-    .pipe(
-      switchMap(({ id }) => this.heroesService.getHeroById(id))
-    ).subscribe(hero => {
-      if (!hero) this.router.navigateByUrl('/');
+      .pipe(
+        switchMap(({ id }) => this.heroesService.getHeroById(id))
+      ).subscribe(hero => {
+        if (!hero) this.router.navigateByUrl('/');
 
-      this.heroForm.reset(hero);
-    })
+        this.heroForm.reset(hero);
+      })
   }
 
   get currentHero(): Hero {
@@ -73,12 +78,27 @@ export class NewPageComponent implements OnInit{
 
     } else {
       this.heroesService.addHero(this.currentHero)
-      .subscribe(hero => {
-        //TODO: Show snackbar and redirect to /heroes/edit/hero.id
-      });
+        .subscribe(hero => {
+          //TODO: Show snackbar and redirect to /heroes/edit/hero.id
+        });
     }
 
     return;
+  }
+
+  onDeleteHero(): void {
+    if (!this.currentHero.id) return;
+
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: this.heroForm.value
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) return;
+      this.heroesService.deleteHerobyId(this.currentHero.id);
+      this.router.navigateByUrl('/heroes');
+
+    });
 
   }
 }
