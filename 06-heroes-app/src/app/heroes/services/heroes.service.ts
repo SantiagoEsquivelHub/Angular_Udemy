@@ -38,8 +38,8 @@ export class HeroesService {
     if (!id) throw new Error('Hero ID is required to delete a hero');
     return this.http.delete<Hero>(`${this.baseUrl}/heroes/${id}`)
       .pipe(
+        map(() => true), // Return (Observable) true if the hero is deleted
         catchError(error => of(false)), // Return (Observable) false if the hero is not found
-        map(() => true) // Return (Observable) true if the hero is deleted
       )
   }
 }
