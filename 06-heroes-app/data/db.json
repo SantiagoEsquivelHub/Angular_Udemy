@@ -16,8 +16,6 @@
       "characters": "Bruce Wayne"
     },
     {
-<<<<<<< Updated upstream
-=======
       "id": "dc-superman",
       "superhero": "Superman",
       "publisher": "DC Comics",
@@ -27,7 +25,6 @@
       "alt_img": "https://upload.wikimedia.org/wikipedia/en/8/8b/Superman_%28Kal_Kent%29.png"
     },
     {
->>>>>>> Stashed changes
       "id": "dc-flash",
       "superhero": "Flash",
       "publisher": "DC Comics",
