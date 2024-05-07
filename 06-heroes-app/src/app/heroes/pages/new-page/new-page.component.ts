@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { filter, switchMap } from 'rxjs';
 
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 import { Hero, Publisher } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
-import { filter, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-new-page',
@@ -42,6 +43,7 @@ export class NewPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private dialog: MatDialog,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -74,13 +76,16 @@ export class NewPageComponent implements OnInit {
       this.heroesService.updateHero(this.currentHero)
         .subscribe(hero => {
           //TODO: Show snackbar
+          this.showSnackbar(`${hero.superhero} updated successfully`);
         });
 
     } else {
       this.heroesService.addHero(this.currentHero)
-        .subscribe(hero => {
-          //TODO: Show snackbar and redirect to /heroes/edit/hero.id
-        });
+      .subscribe(hero => {
+        //TODO: Show snackbar and redirect to /heroes/edit/hero.id
+        this.showSnackbar('Hero created successfully');
+        this.router.navigate(['/heroes/edit', hero.id]);
+      });
     }
 
     return;
@@ -114,5 +119,11 @@ export class NewPageComponent implements OnInit {
 
     // });
 
+  }
+
+  showSnackbar(message: string): void {
+    this.snackbar.open(message, 'Ok!', {
+      duration: 2500
+    })
   }
 }
