@@ -17,14 +17,16 @@
 
   </mat-sidenav>
 
-  <mat-toolbar color="primary">
+  <mat-toolbar color="primary" class="justify-content-between">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    <span class="spacer"></span>
-    <button mat-button>
-      Logout
-    </button>
+    <div class="flex">
+      <span class="spacer">{{user?.email}}</span>
+      <button mat-button (click)="onLogout()">
+        Logout
+      </button>
+    </div>
   </mat-toolbar>
 
   <div class="container p-2">
