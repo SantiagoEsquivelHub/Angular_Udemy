@@ -1,14 +1,14 @@
-<h2>Reactivos: Básicos</h2>
+<h2>Reactives: Basics</h2>
 <hr />
 
 <div class="row">
   <div class="col">
     <form [formGroup]="myForm" autocomplete="off" (ngSubmit)="onSave()">
-      <!-- Campo de producto -->
+      <!-- Campo de Product -->
       <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label">Producto</label>
+        <label class="col-sm-3 col-form-label">Product</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control" placeholder="Nombre del producto" formControlName="name" />
+          <input type="text" class="form-control" placeholder="Product's name" formControlName="name" />
 
           <span class="form-text text-danger" *ngIf="isValidField('name')">
             {{getFieldError('name')}}
@@ -16,25 +16,25 @@
         </div>
       </div>
 
-      <!-- Campo de producto -->
+      <!-- Campo de Product -->
       <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label">Precio</label>
+        <label class="col-sm-3 col-form-label">Price</label>
         <div class="col-sm-9">
-          <input type="number" class="form-control" placeholder="Precio del producto" formControlName="price" />
+          <input type="number" class="form-control" placeholder="Product's price" formControlName="price" />
           <span class="form-text text-danger" *ngIf="isValidField('price')">
-            El precio debe de ser 0 o mayor
+            {{getFieldError('price')}}
           </span>
         </div>
       </div>
 
       <!-- Campo de existencias -->
       <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label">Existencias</label>
+        <label class="col-sm-3 col-form-label">Storage</label>
         <div class="col-sm-9">
-          <input type="number" class="form-control" placeholder="Existencias del producto" formControlName="storage" />
+          <input type="number" class="form-control" placeholder="Product's storage" formControlName="storage" />
 
           <span class="form-text text-danger" *ngIf="isValidField('storage')">
-            Las existencias deben de ser 0 o mayor
+            {{getFieldError('storage')}}
           </span>
         </div>
       </div>
@@ -64,16 +64,16 @@
     <span>Value</span>
     <pre>{{ myForm.value | json }}</pre>
 
-    <span>Precio</span>
+    <span>Price</span>
     <pre>{{ myForm.controls['price'].value | json }}</pre>
 
-    <span>Precio - Errors</span>
+    <span>Price - Errors</span>
     <pre>{{ myForm.controls['price'].errors | json }}</pre>
 
-    <span>Producto</span>
+    <span>Product</span>
     <pre>{{ myForm.controls['name'].value | json }}</pre>
 
-    <span>Producto - Errors</span>
+    <span>Product - Errors</span>
     <pre>{{ myForm.controls['name'].errors | json }}</pre>
   </div>
 </div>

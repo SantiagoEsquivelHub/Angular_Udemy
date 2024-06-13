@@ -47,6 +47,9 @@ export class BasicPageComponent implements OnInit {
           return 'This field is required';
         case 'minlength':
           return `This field must have at least ${errors[key].requiredLength} characters`;
+        case 'min':
+          return `This field must be ${errors[key].min} or greater`;
+
       }
     }
     return null;
